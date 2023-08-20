@@ -1,0 +1,37 @@
+---
+- name: Update apt cache (for Ubuntu/Debian)
+  apt:
+    update_cache: yes
+  when: ansible_os_family == 'Debian'
+  tags: redis
+
+- name: Install Redis packages
+  package:
+    name: redis-server
+    state: present
+  when: ansible_os_family == 'Debian'
+  tags: redis
+
+- name: Install Redis packages (for Red Hat based systems)
+  package:
+    name: redis
+    state: present
+  when: ansible_os_family == 'RedHat'
+  tags: redis
+
+- name: Start and enable Redis service
+  service:
+    name: redis-server
+    state: started
+    enabled: yes
+  when: ansible_os_family == 'Debian'
+  tags: redis
+
+- name: Start and enable Redis service (for Red Hat based systems)
+  service:
+    name: redis
+    state: started
+    enabled: yes
+  when: ansible_os_family == 'RedHat'
+  tags: redis
+

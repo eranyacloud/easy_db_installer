@@ -8,7 +8,7 @@ With EasyDBInstaller, you can effortlessly install the following database system
 * PostgreSQL
 * MongoDB
 * Redis
-* Oracle
+* Oracle (soon)
 * MariaDB
 * MySQL
 * SQLite
@@ -23,7 +23,7 @@ Utilizing DatabaseInstaller is a breeze. Just follow these straightforward steps
 * 3. Run the Ansible Playbook: Execute the provided Ansible playbook. DatabaseInstaller will guide you through the installation process seamlessly.
 
 * 4. Automated Configuration: DatabaseInstaller automatically configures your chosen database with optimal settings, saving you time and effort.
- 
+
 Why Use EasyDBInstaller?
 * Time Saver: Eliminate the need for manual installations and configurations. DatabaseInstaller speeds up the process and gets you up and running in no time.
 
@@ -36,3 +36,40 @@ Why Use EasyDBInstaller?
 * Simplified Management: Once installed, managing and maintaining your databases becomes more manageable.
 
 
+### How to use ansible to implement Databa
+
+#### Mysql
+
+```
+ansible-playbook -i inventory --tag mysql -e 'machine=mysql' install.yml
+```
+
+#### Mariadb
+
+```
+ansible-playbook -i inventory --tag mariadb -e 'machine=mariadb' install.yml
+```
+
+#### Postgresql
+
+```
+ansible-playbook -i inventory --tag postgresql -e 'machine=postgresql' install.yml
+```
+
+#### Sqlite
+
+```
+ansible-playbook -i inventory --tag sqlite -e 'machine=sqlite' install.yml
+```
+
+#### Redis
+
+```
+ansible-playbook -i inventory --tag redis -e 'machine=redis' install.yml
+```
+
+#### Mongodb
+
+```
+ansible-playbook -i inventory --tag mongo -e 'machine=mongo' install.yml
+```

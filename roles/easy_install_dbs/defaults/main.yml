@@ -1,0 +1,9 @@
+---
+# defaults file for easy_install_dbs
+
+## Oracle DB
+oracle_version: 19.3
+oracle_db_install_version: "19.3.0.0.0"
+
+## Mongo DB
+mongodb_version: 4.4
