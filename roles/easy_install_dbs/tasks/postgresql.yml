@@ -1,0 +1,42 @@
+---
+- name: Update apt cache (for Ubuntu/Debian)
+  apt:
+    update_cache: yes
+  when: ansible_os_family == 'Debian'
+  tags: postgresql
+
+- name: Install PostgreSQL packages
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - postgresql
+    - postgresql-contrib
+  when: ansible_os_family == 'Debian'
+  tags: postgresql
+
+- name: Install PostgreSQL packages (for Red Hat based systems)
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - postgresql
+    - postgresql-contrib
+  when: ansible_os_family == 'RedHat'
+  tags: postgresql
+
+- name: Start and enable PostgreSQL service
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
+  when: ansible_os_family == 'Debian'
+  tags: postgresql
+
+- name: Start and enable PostgreSQL service (for Red Hat based systems)
+  service:
+    name: postgresql-{{ postgresql_version }}
+    state: started
+    enabled: yes
+  when: ansible_os_family == 'RedHat'
+  tags: postgresql

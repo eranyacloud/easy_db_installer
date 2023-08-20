@@ -1,0 +1,20 @@
+---
+- name: Update apt cache (for Ubuntu/Debian)
+  apt:
+    update_cache: yes
+  when: ansible_os_family == 'Debian'
+  tags: sqlite
+
+- name: Install SQLite package
+  package:
+    name: sqlite3
+    state: present
+  when: ansible_os_family == 'Debian'
+  tags: sqlite
+
+- name: Install SQLite package (for Red Hat based systems)
+  package:
+    name: sqlite
+    state: present
+  when: ansible_os_family == 'RedHat'
+  tags: sqlite

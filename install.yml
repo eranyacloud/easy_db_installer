@@ -1,0 +1,6 @@
+---
+- hosts: "{{ machine }}"
+  tasks:
+    - name: installing Databases Relational database and Nosql database
+      import_role:
+        name: easy_install_dbs

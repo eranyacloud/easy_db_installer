@@ -1,0 +1,42 @@
+---
+- name: Update apt cache (for Ubuntu/Debian)
+  apt:
+    update_cache: yes
+  when: ansible_os_family == 'Debian'
+  tags: mariadb
+
+- name: Install MariaDB packages
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - mariadb-server
+    - python3-pymysql
+  when: ansible_os_family == 'Debian'
+  tags: mariadb
+
+- name: Install MariaDB packages (for Red Hat based systems)
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - mariadb-server
+    - MySQL-python
+  when: ansible_os_family == 'RedHat'
+  tags: mariadb
+
+- name: Start and enable MariaDB service
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+  when: ansible_os_family == 'Debian'
+  tags: mariadb
+
+- name: Start and enable MariaDB service (for Red Hat based systems)
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+  when: ansible_os_family == 'RedHat'
+  tags: mariadb

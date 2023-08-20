@@ -1,0 +1,10 @@
+---
+# tasks file for easy_install_dbs
+- include: mariadb.yml
+- include: oracle.yml
+- include: postgresql.yml
+- include: sqlite.yml
+- include: redis.yml
+- include: mongo.yml
+- include: mysql.yml
+

@@ -1,0 +1,42 @@
+---
+- name: Update apt cache (for Ubuntu/Debian)
+  apt:
+    update_cache: yes
+  when: ansible_os_family == 'Debian'
+  tags: mysql
+
+- name: Install MySQL packages
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - mysql-server
+    - python3-pymysql
+  when: ansible_os_family == 'Debian'
+  tags: mysql
+
+- name: Install MySQL packages (for Red Hat based systems)
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - mysql-server
+    - MySQL-python
+  when: ansible_os_family == 'RedHat'
+  tags: mysql
+
+- name: Start and enable MySQL service
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+  when: ansible_os_family == 'Debian'
+  tags: mysql
+
+- name: Start and enable MySQL service (for Red Hat based systems)
+  service:
+    name: mysqld
+    state: started
+    enabled: yes
+  when: ansible_os_family == 'RedHat'
+  tags: mysql
