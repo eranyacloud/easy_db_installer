@@ -1,20 +1,20 @@
 [mariadb]
-172.16.104.104
+localhost
 
 [mysql]
-172.16.104.104
+localhost
 
 [postgresql]
-172.16.104.104
+localhost
 
 [oracle]
-172.16.104.104
+localhost
 [sqlite]
-172.16.104.104
+localhost
 [mongo]
-172.16.104.104
+localhost
 
 [redis]
-172.16.104.104
+localhost
 
 
