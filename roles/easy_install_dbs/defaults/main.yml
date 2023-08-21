@@ -6,4 +6,4 @@ oracle_version: 19.3
 oracle_db_install_version: "19.3.0.0.0"
 
 ## Mongo DB
-mongodb_version: 4.4
+mongodb_version: 7.0

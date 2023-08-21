@@ -1,7 +1,17 @@
 ---
+- name: Add MongoDB GPG Key
+  become: yes
+  shell: |
+    rm /usr/share/keyrings/mongodb-server-{{ mongodb_version }}.gpg && \
+    curl -fsSL https://pgp.mongodb.com/server-{{ mongodb_version }}.asc | \
+    sudo gpg -o /usr/share/keyrings/mongodb-server-{{ mongodb_version }}.gpg \
+    --dearmor
+  tags: mongo
+
+
 - name: Add MongoDB repository (for Ubuntu)
   apt_repository:
-    repo: deb [arch=amd64] https://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/{{ mongodb_version }} multiverse
+    repo: deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-{{ mongodb_version }}.gpg ] https://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/{{ mongodb_version }} multiverse
     state: present
   when: ansible_os_family == 'Debian'
   tags: mongo
@@ -20,6 +30,7 @@
   package:
     name: mongodb-org
     state: present
+    update_cache: yes
   when: ansible_os_family == 'Debian' or ansible_os_family == 'RedHat'
   tags: mongo
 
